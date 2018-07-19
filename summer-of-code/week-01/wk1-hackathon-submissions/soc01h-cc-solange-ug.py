@@ -2,16 +2,16 @@
 
 # Global variables
 world = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-          [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-          [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-          [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-          [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+         [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+         [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+         [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+         [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+         [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 n = len(world)
 tiles_queue = []
 
@@ -45,32 +45,32 @@ def check_neighbours(tile):
     i = tile[0]
     j = tile[1]
     # check tiles on the previous row
-    if i-1 >= 0:
-        if world[i-1][j] == 1:
-            tiles_queue.append(list((i-1, j)))
-        if j-1 >= 0:
-            if world[i-1][j-1] == 1:
-                tiles_queue.append(list((i-1, j-1)))
-        if j+1 < n:
-            if world[i-1][j+1] == 1:
-                tiles_queue.append(list((i-1, j+1)))
+    if i - 1 >= 0:
+        if world[i - 1][j] == 1:
+            tiles_queue.append(list((i - 1, j)))
+        if j - 1 >= 0:
+            if world[i - 1][j - 1] == 1:
+                tiles_queue.append(list((i - 1, j - 1)))
+        if j + 1 < n:
+            if world[i - 1][j + 1] == 1:
+                tiles_queue.append(list((i - 1, j + 1)))
     # check tiles on the following row
-    if i+1 < n:
-        if world[i+1][j] == 1:
-            tiles_queue.append(list((i+1, j)))
-        if j-1 >= 0:
-            if world[i+1][j-1] == 1:
-                tiles_queue.append(list((i+1, j-1)))
-        if j+1 < n:
-            if world[i+1][j+1] == 1:
-                tiles_queue.append(list((i+1, j+1)))
+    if i + 1 < n:
+        if world[i + 1][j] == 1:
+            tiles_queue.append(list((i + 1, j)))
+        if j - 1 >= 0:
+            if world[i + 1][j - 1] == 1:
+                tiles_queue.append(list((i + 1, j - 1)))
+        if j + 1 < n:
+            if world[i + 1][j + 1] == 1:
+                tiles_queue.append(list((i + 1, j + 1)))
     # check tiles on the left and on the right
-    if j-1 >= 0:
-        if world[i][j-1] == 1:
-            tiles_queue.append(list((i, j-1)))
-    if j+1 < n:
-        if world[i][j+1] == 1:
-            tiles_queue.append(list((i, j+1)))
+    if j - 1 >= 0:
+        if world[i][j - 1] == 1:
+            tiles_queue.append(list((i, j - 1)))
+    if j + 1 < n:
+        if world[i][j + 1] == 1:
+            tiles_queue.append(list((i, j + 1)))
 
 
 # TESTS
