@@ -1,48 +1,50 @@
-#love affair
+#!/usr/bin/env python3
+# Love Affair
 
-name = "Rebecca Fillier"
-result = ""
 
-print('result: ' + result)
-# print(name[1])
-
-# i = 1
-# print(name[1])
-
-# for i in range(0,15):
-#   print(name[i])
-
-# print(len("Rebecca Fillier"))
-
-for i in range(0, len(name)):
-  # print(name[i])
-  if i % 2 == 0:
+def words_and_indices():
+    print("**** Working with words and indices ****")
+    name = "Rebecca Fillier"
+    result = ""
+    print('result: ' + result)
+    print(name[1])
+    i = 1
     print(name[i])
-    result = result + name[i]
-    print('result just changed to: ' + result)
-
-print('The final result for all even indexed letters in name is: ' + result + '! Drumroll please!!! Thank you. I would like to thank the Academy. (Little bow)')
-
-# "X" land, "o" water
-world = "X"
-# count 1
-
-world = "o"
+    for i in range(0, 15):
+        print(name[i])
 
 
-# print('result is: ' + result)
+def words_indices_and_size():
+    print("**** Working with words, indices and size ****")
+    result = ""
+    name = "Rebecca Fillier"
+    print(len(name))
+    for i in range(0, len(name)):
+        print(name[i])
+        if i % 2 == 0:
+            print(name[i])
+            result = result + name[i]
+            print('result just changed to: ' + result)
+    print('The final result for all even indexed letters in name is: '
+          + result
+          + '! Drumroll please!!! Thank you. I would like to thank the Academy. (Little bow)')
 
-# print(name[-1])
 
-# What happens with the other negative numbers?
+def words_and_negative_or_out_of_range_indices():
+    print("**** Working with words, negative and out of range indices ****")
+    name = "Rebecca Fillier"
+    print(name[-1])
+    # print(name[15]) --> EXCEPTION
+    # print(name[-15]) --> EXCEPTION
 
-# What happens if you are out of range?
 
-# print(name[7])
+# TESTS
+print()
+words_and_indices()
 
-# print(name[-7])
+print()
+words_indices_and_size()
 
-my_birth_month = "August"
-my_birth_day = 3
-print(my_birth_month + my_birth_day)
+print()
+words_and_negative_or_out_of_range_indices()
 
