@@ -2,7 +2,7 @@
 
 
 def working_with_numbers():
-    print("Working with numbers...")
+    print("**** Working with numbers ****")
     print(1 + 2)
     print(3)
     print(10 % 2)
@@ -10,13 +10,13 @@ def working_with_numbers():
 
 
 def bitshifting():
-    print("Bitshifting...")
+    print("**** Bitshifting ****")
     for i in range(0, 9):
         print("bitshift ", i, "times ", 1 << i)
 
 
 def working_with_strings():
-    print("Working with strings...")
+    print("**** Working with strings ****")
     print('Hello, world!')
     print('')
     print('Good-bye.')
@@ -26,14 +26,14 @@ def working_with_strings():
 
 
 def more_strings():
-    print("More strings and an exception...")
+    print("**** More strings and an exception ****")
     print('blink ' * 4)
     print('moo' * 3)
     # print('moo' / 3) --> EXCEPTION
 
 
 def diff_numbers_strings():
-    print("Working with numbers and strings...")
+    print("**** Working with numbers and strings ****")
     print(12 + 12)
     print('12' + '12')
     print('12 + 12')
@@ -46,7 +46,7 @@ def diff_numbers_strings():
 
 
 def advanced_string_operations():
-    print("Advanced string operations...")
+    print("**** Advanced string operations ****")
     print('You\'re swell!')
     print('backslash at the end of a string: \\')
     print('up\\down')
@@ -56,20 +56,20 @@ def advanced_string_operations():
 
 
 # TESTS
-
-
+print()
 working_with_numbers()
-print()
 
+print()
 bitshifting()
-print()
 
+print()
 working_with_strings()
-print()
 
+print()
 more_strings()
+
 print()
 diff_numbers_strings()
-print()
 
+print()
 advanced_string_operations()
