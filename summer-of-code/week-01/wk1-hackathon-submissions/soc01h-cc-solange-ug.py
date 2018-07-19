@@ -42,39 +42,18 @@ def check_neighbours(tile):
     :param tile: input tile as an array of indexes
     :return: None
     """
-    i = tile[0]
-    j = tile[1]
-    # check tiles on the previous row
-    if i - 1 >= 0:
-        if world[i - 1][j] == 1:
-            tiles_queue.append(list((i - 1, j)))
-        if j - 1 >= 0:
-            if world[i - 1][j - 1] == 1:
-                tiles_queue.append(list((i - 1, j - 1)))
-        if j + 1 < n:
-            if world[i - 1][j + 1] == 1:
-                tiles_queue.append(list((i - 1, j + 1)))
-    # check tiles on the following row
-    if i + 1 < n:
-        if world[i + 1][j] == 1:
-            tiles_queue.append(list((i + 1, j)))
-        if j - 1 >= 0:
-            if world[i + 1][j - 1] == 1:
-                tiles_queue.append(list((i + 1, j - 1)))
-        if j + 1 < n:
-            if world[i + 1][j + 1] == 1:
-                tiles_queue.append(list((i + 1, j + 1)))
-    # check tiles on the left and on the right
-    if j - 1 >= 0:
-        if world[i][j - 1] == 1:
-            tiles_queue.append(list((i, j - 1)))
-    if j + 1 < n:
-        if world[i][j + 1] == 1:
-            tiles_queue.append(list((i, j + 1)))
+    x = tile[0]
+    y = tile[1]
+    for i in range(x - 1, x + 2):
+        if (i >= 0) and (i < n):
+            for j in range(y - 1, y + 2):
+                if (j >= 0) and (j < n):
+                    if world[i][j] == 1:
+                        tiles_queue.append(list((i, j)))
 
 
 # TESTS
-print("**** Continent size form tile [5,5] ****")
-starting_position = [5, 5]
+print("**** Continent size from tile [0, 10] ****")
+starting_position = [0, 10]
 the_size = continent_size(starting_position)
 print('our continent size is ' + str(the_size))
