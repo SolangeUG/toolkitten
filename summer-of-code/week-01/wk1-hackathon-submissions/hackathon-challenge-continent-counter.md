@@ -1,4 +1,4 @@
-# Week 1 Hackathon Challenge -  Continent Counter
+## Week 1 Hackathon Challenge -  Continent Counter
 
 **Calculate the size of a continent you are standing on in your 11x11 world in [Civilization III][1]**.
 
@@ -23,7 +23,8 @@ soc01h-cc-firstname-lastname.py
 
 If you are a **beginner/false beginner**, read on. We'll be also giving out hints every day.
 
-## Hint
+### Hint
+----
 
 When generating the worlds for the game Civilization III, we want worlds
 with two primary supercontinents; those tend to be a lot of fun and just sort
@@ -40,7 +41,7 @@ also making sure each gets counted), and repeat the process.
 The fun part (actually, it was all fun, not just this part!) was in computing
 each continent’s size so that is the challenge for this week's hackathon.
 
-#### Let’s look at a trimmed-down version.
+### Let’s look at a trimmed-down version.
 ----
 
 Let’s say we have an 11x11 world - represented as an array of arrays... basically just a grid - and that we want to find the size of the continent in the middle - that is, the continent of which tile (5,5) is a part.
