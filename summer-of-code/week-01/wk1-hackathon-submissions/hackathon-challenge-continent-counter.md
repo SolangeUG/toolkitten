@@ -7,7 +7,7 @@ Bonuses for:
 - random world generator
 - fastest program
 - benchmarking
-- extension of the problem to n x n size world
+- extension of the problem to nxn size world
 
 If you are **intermediate/advanced** try to do your own research about Civilization III and then start working on the above. Submit your program via **pull request** with the following file name:
 
@@ -41,6 +41,7 @@ The fun part (actually, it was all fun, not just this part!) was in computing
 each continent’s size so that is the challenge for this week's hackathon.
 
 #### Let’s look at a trimmed-down version.
+----
 
 Let’s say we have an 11x11 world - represented as an array of arrays... basically just a grid - and that we want to find the size of the continent in the middle - that is, the continent of which tile (5,5) is a part.
 
@@ -52,6 +53,6 @@ But before you get to the code, solve the problem in English first. It will help
 **NB:**
 - there are two types of tiles: water and land
 - we only want to count land
-- you **CAN** travel diagonally
+- you **can** travel diagonally
 
 [1]: https://en.wikipedia.org/wiki/Civilization_III
