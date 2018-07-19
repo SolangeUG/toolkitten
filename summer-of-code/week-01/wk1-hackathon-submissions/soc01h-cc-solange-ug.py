@@ -1,7 +1,24 @@
 #!/usr/bin/env python3
 
+import random
+
 # Global variables
 tiles_queue = []
+
+
+def random_world_generator(n):
+    """
+    Randomly generate a world of size n
+    :param n: desired size for the world to be generated
+    :return: a randomly generated world
+    """
+    row = [0 for x in range(n)]
+    random_world = [row for y in range(n)]
+    for i in range(n):
+        for j in range(n):
+            value = random.randint(0, 1)
+            random_world[i][j] = value
+    return random_world
 
 
 def continent_size(grid, start):
@@ -13,7 +30,7 @@ def continent_size(grid, start):
     """
     size = 0
     n = len(grid)
-    # make sure the starting position in within the grid/world bounds
+    # make sure the starting position is within the grid/world bounds
     if (start[0] >= 0) and (start[0] < n) \
             and (start[1] >= 0) and (start[1] < n):
         tiles_queue.append(start)
@@ -47,19 +64,22 @@ def check_neighbours(grid, tile):
                         tiles_queue.append(list((i, j)))
 
 
-# TESTS
+def print_grid(grid):
+    """
+    Print the given grid in a readable form
+    :param grid: input grid/world to be printed
+    """
+    print('[')
+    for row in grid:
+        print(row, ',')
+    print(']')
+
+
+# ########### TESTS ##########
 print("**** **** **** **** **** **** **** ****")
-world = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-         [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-         [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-         [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
-         [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+world = random_world_generator(14)
+print_grid(world)
 starting_position = [5, 7]
 the_size = continent_size(world, starting_position)
-print('our continent size is ' + str(the_size))
+print('Continent size is ', the_size)
+
