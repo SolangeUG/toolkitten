@@ -128,20 +128,3 @@ other_list_operations()
 
 print()
 real_array()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
