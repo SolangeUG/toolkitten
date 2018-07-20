@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import random
+import time
 
 # Global variables
 tiles_queue = []
@@ -57,6 +58,7 @@ def continent_size(grid, start):
             j = tile[1]
             if grid[i][j] == 1:
                 size += 1
+                # mark this element as "already treated"
                 grid[i][j] = 0
                 check_neighbours(grid, tile)
     return size
@@ -92,11 +94,27 @@ def print_grid(grid):
     print(']')
 
 
-# ########### TESTS ##########
-print("**** **** **** **** **** **** **** ****")
-world = random_world_generator(12)
-print_grid(world)
+""" 
+#################################################################################
+                                    PROGRAM
+#################################################################################
+"""
+print()
+world_size = input('Enter valid number for size of world to generate: ')
+while not world_size.isdigit():
+    world_size = input('Enter valid number for size of world to generate: ')
+world_size = int(world_size)
+
+# benchmark: measure time taken by program to run
+start_time = time.process_time()
+
+world = random_world_generator(world_size)
+# uncomment the following line to display randomly generated world
+# print_grid(world)
 sizes = compute_all_continents_sizes(world)
-print('All continents sizes ', sizes)
+print('\rAll continents sizes:', sizes)
+
+elapsed_time = time.process_time() - start_time
+print('Program running time:', "{:10.20f}".format(elapsed_time), 'seconds.')
 
 
