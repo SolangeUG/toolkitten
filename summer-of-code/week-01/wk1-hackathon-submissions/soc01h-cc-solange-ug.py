@@ -21,6 +21,19 @@ def random_world_generator(n):
     return random_world
 
 
+def get_two_largest_continents(grid):
+    """
+    Given a world, determine its two largest continents
+    :param grid: input world
+    :return: a dictionary associating the two largest continents with their sizes
+    """
+    continents = compute_all_continents_sizes(grid)
+    largest = sorted(continents.items(), key=lambda kv: kv[1], reverse=True)
+    if len(largest) > 2:
+        largest = largest[0:2]
+    return dict(largest)
+
+
 def compute_all_continents_sizes(grid):
     """
     Given a world, compute all its continents sizes
@@ -94,10 +107,25 @@ def print_grid(grid):
     print(']')
 
 
+def program_benchmark(n):
+    """
+    Benchmark computing all the continents sizes of a randomly generated world
+    :param n: size of world to be generated
+    :return: average running time of our program run 1000 times
+    """
+    total_time = 0
+    for i in range(1000):
+        start = time.process_time()
+        grid = random_world_generator(n)
+        compute_all_continents_sizes(grid)
+        total_time += time.process_time() - start
+    return total_time/1000
+
+
 """ 
-#################################################################################
-                                    PROGRAM
-#################################################################################
+###############################################################################################
+                                            PROGRAM
+###############################################################################################
 """
 print()
 world_size = input('Enter valid number for size of world to generate: ')
@@ -105,16 +133,12 @@ while not world_size.isdigit():
     world_size = input('Enter valid number for size of world to generate: ')
 world_size = int(world_size)
 
-# benchmark: measure time taken by program to run
-start_time = time.process_time()
-
 world = random_world_generator(world_size)
 # uncomment the following line to display randomly generated world
 # print_grid(world)
-sizes = compute_all_continents_sizes(world)
-print('\rAll continents sizes:', sizes)
+largest_continents = get_two_largest_continents(world)
+print('Largest continents sizes:', largest_continents)
 
-elapsed_time = time.process_time() - start_time
-print('Program running time:', "{:10.20f}".format(elapsed_time), 'seconds.')
-
-
+# benchmark: measure time taken by program to run
+average_running_time = program_benchmark(world_size)
+print('Average program running time (in seconds):', "{:10.20f}".format(average_running_time))
