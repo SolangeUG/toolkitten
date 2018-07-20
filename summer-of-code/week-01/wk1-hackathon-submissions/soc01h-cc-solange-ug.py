@@ -12,13 +12,30 @@ def random_world_generator(n):
     :param n: desired size for the world to be generated
     :return: a randomly generated world
     """
-    row = [0 for x in range(n)]
-    random_world = [row for y in range(n)]
+    random_world = [[0] * n for x in range(n)]
     for i in range(n):
         for j in range(n):
             value = random.randint(0, 1)
             random_world[i][j] = value
     return random_world
+
+
+def compute_all_continents_sizes(grid):
+    """
+    Given a world, compute all its continents sizes
+    :param grid: given world
+    :return: a dictionary that associates each continent with its size
+    """
+    counter = 0
+    result = {}
+    n = len(grid)
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                counter += 1
+                size = continent_size(grid, list((i, j)))
+                result['continent ' + str(counter)] = size
+    return result
 
 
 def continent_size(grid, start):
@@ -71,15 +88,15 @@ def print_grid(grid):
     """
     print('[')
     for row in grid:
-        print(row, ',')
+        print('\t', row, ',')
     print(']')
 
 
 # ########### TESTS ##########
 print("**** **** **** **** **** **** **** ****")
-world = random_world_generator(14)
+world = random_world_generator(12)
 print_grid(world)
-starting_position = [5, 7]
-the_size = continent_size(world, starting_position)
-print('Continent size is ', the_size)
+sizes = compute_all_continents_sizes(world)
+print('All continents sizes ', sizes)
+
 
