@@ -81,7 +81,7 @@ def fullname_greeting():
     firstname = input('Please enter your firstname: ')
     middlename = input('Please enter your middlename: ')
     lastname = input('Please enter your lastname: ')
-    return 'Goodmorning ' + firstname + ' ' + middlename + ' ' + lastname + '!'
+    return 'Good morning ' + firstname + ' ' + middlename + ' ' + lastname + '!'
 
 
 def bigger_better_number():
@@ -109,6 +109,11 @@ def table_of_contents_formatter():
     Display a formatted table of contents using center, ljust and rjust functions
     :return: a formatted table of contents
     """
+    contents = "Table of Contents \n" \
+        + "Chapter 1 ".ljust(1) + "Getting Started".center(30) + "page 1".rjust(7) + "\n" \
+        + "Chapter 2 ".ljust(1) + "Numbers".center(22) + "page 9".rjust(15) + "\n" \
+        + "Chapter 3 ".ljust(1) + "Letters".center(22) + "page 13".rjust(16)
+    return contents
 
 
 """ 
@@ -116,4 +121,27 @@ def table_of_contents_formatter():
                                             PROGRAM
 ###############################################################################################
 """
+print()
+print('There\'re', hours_in_year(2018), 'hours in year 2018')
 
+print()
+print('There\'re', minutes_in_decade(), 'minutes in a decade')
+
+print()
+your_age = 35
+print('Your my age in seconds is', age_in_seconds(your_age))
+
+print()
+print('A 32-bit processor will time out in', processor_timeout(32), 'days')
+
+print()
+print(fullname_greeting())
+
+print()
+print(bigger_better_number())
+
+print()
+print(angry_boss_program())
+
+print()
+print(table_of_contents_formatter())
