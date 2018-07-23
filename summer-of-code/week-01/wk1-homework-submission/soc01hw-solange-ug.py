@@ -116,7 +116,77 @@ def table_of_contents_formatter():
     return contents
 
 
-""" 
+def ninety_nine_bottles():
+    """
+    Return the lyrics to that beloved classic 99 Bottles of Beer on the Wall
+    :return: 99 Bottles of Beer on the Wall lyrics
+    """
+    bottles = 99
+    lyrics = ''
+    while bottles > 0:
+        lyrics += str(bottles) + ' bottles of beer on the wall, ' + str(bottles) + ' bottles of beer.\n' \
+                    + 'Take one down and pass it around, ' + str(bottles - 1) + ' bottles of beer on the wall.\n\n'
+        bottles -= 1
+
+    bottles = 99
+    lyrics += 'No more bottles of beer on the wall, no more bottles of beer.\n' \
+              + 'Go to the store and buy some more, ' + str(bottles) + ' bottles of beer on the wall.\n\n'
+    return lyrics
+
+
+def deaf_grandma():
+    """
+    Whatever is entered by the user, this should output HUH?! SPEAK UP, GIRL!
+    Unless, it's typed in all capital letters. Then, the output should be NO, NOT SINCE YYYY,
+    where YYYY is between 1938 and 1950.
+    The function terminates when the user inputs BYE.
+    :return: deaf grandma's response
+    """
+    import random
+
+    question = input('Ask Grandma questions:\n ')
+    while True:
+        if not question.isupper():
+            question = input('HUH?! SPEAK UP, GIRL!\n ')
+        else:
+            if question != 'BYE':
+                year = 1938 + random.randrange(0, 13)
+                question = input('NO, NOT SINCE ' + str(year) + '!\n ')
+            else:
+                return
+
+
+def leap_years_in_between(start, end):
+    """
+    Return all the leap years in between two input years, and including start and end years if they're leap years
+    :param start: input starting year
+    :param end: input end year
+    :return: all leap years in between
+    """
+    leap_years = []
+    for year in range(start, end + 1):
+        if is_leap_year(year):
+            leap_years.append(year)
+    return leap_years
+
+
+def word_sorter():
+    """
+    Sort and return a list of input words from the user
+    :return: a sorted list of words provided by a user
+    """
+    words = []
+    print('Enter words of your choice, one word per line.\nPress ENTER on an epmty line to terminate the list.')
+    word = 'word'
+    while word != '':
+        word = input()
+        if word != '':
+            words.append(word)
+    words.sort()
+    return words
+
+
+"""
 ###############################################################################################
                                             PROGRAM
 ###############################################################################################
@@ -145,3 +215,15 @@ print(angry_boss_program())
 
 print()
 print(table_of_contents_formatter())
+
+print()
+print(ninety_nine_bottles())
+
+print()
+deaf_grandma()
+
+print()
+print(leap_years_in_between(1996, 2020))
+
+print()
+print(word_sorter())
