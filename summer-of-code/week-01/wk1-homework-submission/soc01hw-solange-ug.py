@@ -186,44 +186,78 @@ def word_sorter():
     return words
 
 
+def old_school_roman(number):
+    """
+    Return the old-school roman numeral equivalent to the input number
+    :param number: input number to be converted
+    :return: equivalent old-school roman numeral
+    """
+    # I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000
+    divisors = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+
+    d = number
+    numeral = ''
+    for key, value in divisors.items():
+        d = int(d / key)
+        if d > 0:
+            for i in range(0, d):
+                numeral += value
+        d = number % key
+    return numeral
+
+
+def new_style_roman(number):
+    """
+    Return the new-style roman numeral equivalent to the input number
+    :param number: input number to be converted
+    :return: equivalent new-style roman numeral
+    """
+
 """
 ###############################################################################################
-                                            PROGRAM
+                                            TESTS
 ###############################################################################################
 """
-print()
-print('There\'re', hours_in_year(2018), 'hours in year 2018')
+year = 2018
+result = hours_in_year(year)
+print('\nThere\'re', result, 'hours in year ', year, '\n')
 
-print()
-print('There\'re', minutes_in_decade(), 'minutes in a decade')
+result = minutes_in_decade()
+print('There\'re', result, 'minutes in a decade\n')
 
-print()
 your_age = 35
-print('Your my age in seconds is', age_in_seconds(your_age))
+result = age_in_seconds(your_age)
+print('Your age in seconds is', result, '\n')
 
-print()
-print('A 32-bit processor will time out in', processor_timeout(32), 'days')
+archi = 32
+result = processor_timeout(archi)
+print('A 32-bit processor will time out in', result, 'days\n')
 
-print()
-print(fullname_greeting())
+result = fullname_greeting()
+print(result, '\n')
 
-print()
-print(bigger_better_number())
+result = bigger_better_number()
+print('Bigger, better number suggestion:', result, '\n')
 
-print()
-print(angry_boss_program())
+result = angry_boss_program()
+print(result, '\n')
 
-print()
-print(table_of_contents_formatter())
+result = table_of_contents_formatter()
+print(result, '\n')
 
-print()
-print(ninety_nine_bottles())
+result = ninety_nine_bottles()
+print(result)
 
-print()
 deaf_grandma()
 
-print()
-print(leap_years_in_between(1996, 2020))
+start_year = 1988
+end_year = 2025
+result = leap_years_in_between(start_year, end_year)
+print('\n', result, '\n')
 
-print()
-print(word_sorter())
+result = word_sorter()
+print(result, '\n')
+
+input_number = 48
+result = old_school_roman(input_number)
+print(input_number, 'is equivalent to', result, 'in old-school roman numeral notation')
