@@ -212,52 +212,76 @@ def new_style_roman(number):
     :param number: input number to be converted
     :return: equivalent new-style roman numeral
     """
+    divisors = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+    next_value = {'I': 'X', 'X': 'L', 'C': 'M'}
+
+    d = number
+    numeral = ''
+    for key, value in divisors.items():
+        d = int(d / key)
+        if 0 < d <= 3:
+            for i in range(0, d):
+                numeral += value
+        elif d > 3:
+            if key == 100:
+                next_val = 'D'
+            else:
+                next_val = next_value[value]
+            numeral += value
+            numeral += next_val
+        d = number % key
+    return numeral
+
 
 """
 ###############################################################################################
                                             TESTS
 ###############################################################################################
 """
-year = 2018
-result = hours_in_year(year)
-print('\nThere\'re', result, 'hours in year ', year, '\n')
+# year = 2018
+# result = hours_in_year(year)
+# print('\nThere\'re', result, 'hours in year ', year, '\n')
+#
+# result = minutes_in_decade()
+# print('There\'re', result, 'minutes in a decade\n')
+#
+# your_age = 35
+# result = age_in_seconds(your_age)
+# print('Your age in seconds is', result, '\n')
+#
+# archi = 32
+# result = processor_timeout(archi)
+# print('A 32-bit processor will time out in', result, 'days\n')
+#
+# result = fullname_greeting()
+# print(result, '\n')
+#
+# result = bigger_better_number()
+# print('Bigger, better number suggestion:', result, '\n')
+#
+# result = angry_boss_program()
+# print(result, '\n')
+#
+# result = table_of_contents_formatter()
+# print(result, '\n')
+#
+# result = ninety_nine_bottles()
+# print(result)
+#
+# deaf_grandma()
+#
+# start_year = 1988
+# end_year = 2025
+# result = leap_years_in_between(start_year, end_year)
+# print('\n', result, '\n')
+#
+# result = word_sorter()
+# print(result, '\n')
+#
+# input_number = 48
+# result = old_school_roman(input_number)
+# print(input_number, 'is equivalent to', result, 'in old-school roman numeral notation')
 
-result = minutes_in_decade()
-print('There\'re', result, 'minutes in a decade\n')
-
-your_age = 35
-result = age_in_seconds(your_age)
-print('Your age in seconds is', result, '\n')
-
-archi = 32
-result = processor_timeout(archi)
-print('A 32-bit processor will time out in', result, 'days\n')
-
-result = fullname_greeting()
-print(result, '\n')
-
-result = bigger_better_number()
-print('Bigger, better number suggestion:', result, '\n')
-
-result = angry_boss_program()
-print(result, '\n')
-
-result = table_of_contents_formatter()
-print(result, '\n')
-
-result = ninety_nine_bottles()
-print(result)
-
-deaf_grandma()
-
-start_year = 1988
-end_year = 2025
-result = leap_years_in_between(start_year, end_year)
-print('\n', result, '\n')
-
-result = word_sorter()
-print(result, '\n')
-
-input_number = 48
-result = old_school_roman(input_number)
-print(input_number, 'is equivalent to', result, 'in old-school roman numeral notation')
+input_number = 900
+result = new_style_roman(input_number)
+print(input_number, 'is equivalent to', result, 'in new-style roman numeral notation')
