@@ -64,3 +64,6 @@ venv/
 # PyCharm project files
 *.iml
 .idea/
+
+# Python bytecode
+__pycache__/
