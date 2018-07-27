@@ -22,15 +22,16 @@
 
 This submission contains the following files:
 - `main.py`: program entry point to get the boggle solver started
-- `score.py`: contains a function that calculates the score
-- `board.py`: module that randomly generate a boggle board
+- `solver.py`: class module that implements a boggle game solver
+- `board.py`: module that randomly generates a boggle board
 - `dictionary.py`: module to implement the boggle dictionary using a trie
 - `trienode.py`: class that represents a trie node
-- `boggle-dictionary.txt`: the dictionary text file used for this project
+- `dictionary.txt`: the dictionary text file used for this project
 
 **To run the program:**
-- Download and unzip the `soc2h-bs-sug-ll-al.zip` file.
-- From a command line window, navigate to the (newly unzipped) `soc2h-bs-sug-ll-al` folder.
+- Download and unzip this `toolkitten` project source code..
+- From a command line window, navigate to the (newly unzipped) project root folder, and then into the 
+`summer-of-code/week-02/boggle-solver` subfolder.
 - Launch the application by running `python main.py`.
 
 
