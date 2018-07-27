@@ -29,7 +29,7 @@ This submission contains the following files:
 - `dictionary.txt`: the dictionary text file used for this project
 
 **To run the program:**
-- Download and unzip this `toolkitten` project source code..
+- Download and unzip this `toolkitten` project source code.
 - From a command line window, navigate to the (newly unzipped) project root folder, and then into the 
 `summer-of-code/week-02/boggle-solver` subfolder.
 - Launch the application by running `python main.py`.
