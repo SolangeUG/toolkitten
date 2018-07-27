@@ -56,6 +56,11 @@ typings/
 
 # dotenv environment variables file
 .env
+venv/
 
 # next.js build output
 .next
+
+# PyCharm project files
+*.iml
+.idea/
