@@ -7,7 +7,7 @@ import time
 tiles_queue = []
 
 
-def random_world_generator(n):
+def generate_random_world(n):
     """
     Randomly generate a world of size n
     :param n: desired size for the world to be generated
@@ -47,12 +47,12 @@ def compute_all_continents_sizes(grid):
         for j in range(n):
             if grid[i][j] == 1:
                 counter += 1
-                size = continent_size(grid, list((i, j)))
+                size = get_continent_size(grid, list((i, j)))
                 result['continent ' + str(counter)] = size
     return result
 
 
-def continent_size(grid, start):
+def get_continent_size(grid, start):
     """
     Return the size of the continent which the start tile is part of
     :param grid: given world that contains the start position
@@ -114,31 +114,31 @@ def program_benchmark(n):
     :return: average running time of our program run 1000 times
     """
     total_time = 0
-    for i in range(1000):
+    iterations = 1000
+    for i in range(iterations):
         start = time.process_time()
-        grid = random_world_generator(n)
+        grid = generate_random_world(n)
         compute_all_continents_sizes(grid)
         total_time += time.process_time() - start
-    return total_time/1000
+    return total_time/iterations
 
 
-""" 
-###############################################################################################
-                                            PROGRAM
-###############################################################################################
-"""
-print()
-world_size = input('Enter valid number for size of world to generate: ')
-while not world_size.isdigit():
+if __name__ == '__main__':
+    """
+    Main
+    """
+    print()
     world_size = input('Enter valid number for size of world to generate: ')
-world_size = int(world_size)
+    while not world_size.isdigit():
+        world_size = input('Enter valid number for size of world to generate: ')
+    world_size = int(world_size)
 
-world = random_world_generator(world_size)
-# uncomment the following line to display randomly generated world
-# print_grid(world)
-largest_continents = get_two_largest_continents(world)
-print('Largest continents sizes:', largest_continents)
+    world = generate_random_world(world_size)
+    # uncomment the following line to display randomly generated world
+    # print_grid(world)
+    largest_continents = get_two_largest_continents(world)
+    print('Largest continents sizes:', largest_continents)
 
-# benchmark: measure time taken by program to run
-average_running_time = program_benchmark(world_size)
-print('Average program running time (in seconds):', "{:10.20f}".format(average_running_time))
+    # benchmark: measure time taken by program to run
+    average_running_time = program_benchmark(world_size)
+    print('Average program running time (in seconds):', "{:10.20f}".format(average_running_time))
