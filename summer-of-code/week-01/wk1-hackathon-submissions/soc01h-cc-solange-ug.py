@@ -139,6 +139,6 @@ if __name__ == '__main__':
     largest_continents = get_two_largest_continents(world)
     print('Largest continents sizes:', largest_continents)
 
-    # benchmark: measure time taken by program to run
+    # benchmark: measure average time taken by program to run over a thousand iterations
     average_running_time = program_benchmark(world_size)
     print('Average program running time (in seconds):', "{:10.20f}".format(average_running_time))
