@@ -12,7 +12,7 @@ Bonuses for:
 If you are **intermediate/advanced** try to do your own research about Civilization III and then start working on the above. Submit your program via **pull request** with the following file name:
 
 ```
-soc05h-cc-firstname-lastname.py
+soc05h-cc-firstname-lastname.zip
 ```
 
 - `soc` is for the Summer Of Code
