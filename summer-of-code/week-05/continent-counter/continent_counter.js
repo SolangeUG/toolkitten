@@ -177,11 +177,63 @@ function getAllContinentsSizes() {
 /**
  * Return the size of the continent which the start position is part of
  * @param startPosition starting position is an array of indices
- * @return the continent size around the input starting position
+ * @return number continent size around the input starting position
  */
 function getContinentSize(startPosition) {
-    // TODO: implement function
-    return undefined;
+    let continent_size = 0;
+    let n = world.length;
+
+    // startPosition is an array of indices on the grid
+    let row = startPosition[0];
+    let col = startPosition[1];
+
+    // make sure the starting position is inside the world bounds
+    if ((row >= 0) && (row < n) && (col >= 0) && (col < n)) {
+        // start exploring from the input starting position
+        tilesQueue.push(startPosition);
+
+        while (tilesQueue.length > 0) {
+            let tile = tilesQueue.pop();
+            let i = tile[0]; let j = tile[1];
+            if (world[i][j] === 1) {
+                continent_size += 1;
+                // mark this element as "already treated"
+                world[i][j] = 0;
+                // explore this "element/tile" neighbours
+                checkNeighbours(tile);
+            }
+        }
+    }
+    return continent_size;
+}
+
+/**
+ * Check if the neighbouring tiles have a desired value (1 in this case)
+ * and add them to our global variable tilesQueue so they can be explored later
+ * @param tile input tile as an array of indices
+ */
+function checkNeighbours(tile) {
+    let row = tile[0]; let col = tile[1]; let n = world.length;
+
+    /* The exploration zone is a 3x3 square centered at the input tile.
+     * Therefore, row-wise, we start exploring from (row - 1) to (row + 1) included.
+     * And, column-wise, we'll also explore from (col - 1) to (col + 1) included.
+     */
+    for (let i = (row - 1); i <= (row + 1); i++) {
+        // make sure we're still inside the world/grid's bounds
+        if ((i >= 0) && (i < n)) {
+            for (let j = (col - 1); j <= (col + 1); i++) {
+                // make sure we're still inside the world/grid's bounds
+                if ((j >= 0) && (j < n)) {
+                    // check the tile's value
+                    if (world[i][j] === 1) {
+                        // push the current tile (grid position) onto the queue
+                        tilesQueue.push([i, j]);
+                    }
+                }
+            }
+        }
+    }
 }
 
 
