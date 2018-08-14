@@ -31,7 +31,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                           <a class="nav-link" href="#">
                               Continent Counter <span class="sr-only">(current)</span>
                           </a>
@@ -71,18 +71,27 @@
                         <label for="sizeInput" class="col-sm-1 col-form-label" >Size</label>
                         <div class="col-sm-4">
                             <input id="sizeInput" class="form-control" type="number"
-                                   min="1" max="22" value="0" name="size" autofocus>
+                                   min="1" max="22" name="size" placeholder="min: 1, max: 22" autofocus
+                                   onfocusout="checkUserInput()" onfocusin="initialize()">
                             <label id="errorLabel" class="text-danger"></label>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-7">
                             <button id="submitButton" class="btn btn-secondary" onclick="main()" type="submit" >
                                 Submit
                             </button>
                         </div>
                     </div>
                 </form>
+            </section>
+            <section id="continentCounter" hidden>
+                <div id="results" class="border border-info row">
+                    <label id="generatedWorld" class="col-sm-12 text-info"></label>
+                    <label id="largestContinents" class="col-sm-12 text-info"></label>
+                    <label id="benchmark" class="col-sm-12 text-info"></label>
+                </div>
+                <button id="reinitButton" class="btn btn-dark" onclick="initialize()" type="submit" >
+                    Restart
+                </button>
             </section>
 
 
