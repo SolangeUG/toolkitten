@@ -1,6 +1,7 @@
 // Global variables
 let size = 0;
 let world = [];
+let worldStr = '';
 let tilesQueue = [];
 let largestContinents = {};
 let averageRunningTime = 0.0;
@@ -10,28 +11,26 @@ let averageRunningTime = 0.0;
  */
 function main() {
 
-    document.getElementById('sizeInput').disabled = true;
-    document.getElementById('submitButton').disabled = true;
+  document.getElementById('sizeInput').disabled = true;
+  document.getElementById('submitButton').disabled = true;
 
-    // unhide computation results components
-    document.getElementById('continentCounter').hidden = false;
-    document.getElementById('generatedWorld').innerText = "Generated World is ...";
-    document.getElementById('largestContinents').innerText = "Two largest continents are ...";
-    document.getElementById('benchmark').innerText = "Average running time is ...";
+  // generate world of size input by the user
+  world = generateRandomWorld(size);
 
-    // generate world of size input by the user
-    world = generateRandomWorld(size);
+  // get a string representation of the previously (randomly) generated world
+  worldStr = getWorldAsString();
 
-    // display the previously (randomly) generated world
-    displayWorld();
+  // compute the two largest continents from the world
+  largestContinents = getTwoLargestContinents();
 
-    // compute the two largest continents from the world
-    largestContinents = getTwoLargestContinents();
-    console.log("Two largest continents:", largestContinents);
+  // benchmark: measure average time taken by program to run over a thousand iterations
+  averageRunningTime = getAverageRunningTime(size);
 
-    // benchmark: measure average time taken by program to run over a thousand iterations
-    averageRunningTime = getAverageRunningTime(size);
-    console.log("Average running time:", averageRunningTime);
+  // unhide computation results components
+  document.getElementById('continentCounter').hidden = false;
+  document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
+  document.getElementById('largestContinents').innerText = "The two largest continents are: ";
+  document.getElementById('benchmark').innerText = "Average running time is: ";
 }
 
 /**
@@ -43,6 +42,7 @@ function checkUserInput() {
     size = parseInt(world_size);
 
     if (isNaN(size) || (size < 1)) {
+        // should the user input be "illegal":
         document.getElementById('errorLabel').innerText = "Please, enter valid positive number!";
         document.getElementById('submitButton').disabled = true;
         size = 0;
@@ -57,18 +57,39 @@ function checkUserInput() {
 /**
  * Randomly generate a world of size n
  * @param n size of the world to generate
- * @return a randomly generated world
+ * @return any[] randomly generated world
  */
 function generateRandomWorld(n) {
-    // TODO: implement function
-    console.log("Tiles queue:", tilesQueue)
+    let grid = [];
+    for (let i = 0; i < n; i++) {
+        let line = [];
+        for (let j = 0; j < n; j++) {
+            // generate a random integer value between 0 and 1
+            line[j] = Math.floor(Math.random() * 2);
+        }
+        grid[i] = line;
+    }
+    return grid;
 }
 
 /**
- * Display the generated world (grid)
+ * Return a string representation of the generated world (grid)
  */
-function displayWorld() {
-    // TODO: implement function
+function getWorldAsString() {
+    let griddStr = '\t[';
+    let n = world.length;
+    for (let i = 0; i < n; i++) {
+        if (i !== 0) {
+          griddStr += '\t ' + world[i];
+        } else {
+          griddStr += world[i];
+        }
+        if (i !== n - 1) {
+          griddStr += '\n';
+        }
+    }
+    griddStr += ']';
+    return griddStr;
 }
 
 /**
@@ -92,14 +113,22 @@ function getAverageRunningTime(n) {
  * (Re)Initialize global variables
  */
 function initialize() {
+    // (re)initialize global variables
     size = 0;
     world = [];
+    worldStr = '';
     tilesQueue = [];
     largestContinents = {};
     averageRunningTime = 0.0;
+
+    // (re)initialize HTML components to dispaly results
     document.getElementById('sizeInput').disabled = false;
-    document.getElementById('sizeInput').innerText = '1';
+    document.getElementById('sizeInput').innerHTML = '';
     document.getElementById('submitButton').disabled = false;
+
+    document.getElementById('generatedWorld').innerText = "";
+    document.getElementById('largestContinents').innerText = "";
+    document.getElementById('benchmark').innerText = "";
     document.getElementById('continentCounter').hidden = true;
 }
 
