@@ -36,6 +36,8 @@ function main() {
 /**
  * Check user input for world size
  */
+/* jslint node:true, unused:false */
+// noinspection JSUnusedGlobalSymbols
 function checkUserInput() {
     // retrieve the size of world to generate
     let world_size = document.getElementById('sizeInput').value;
@@ -94,10 +96,30 @@ function getWorldAsString() {
 
 /**
  * Return the two largest continents of a generated world
- * @return a list of the two largest continents of the world
+ * @return a map of the two largest continents of the world
  */
 function getTwoLargestContinents() {
-  // TODO: implement function
+    let continents = getAllContinentsSizes();
+    let sortedContinents = new Map([...continents.entries()].sort(
+        (a, b) => b[1] - a[1]
+    ));
+
+    let counter = 0;
+    let result = {};
+
+    // choose the two largest continents
+    if (sortedContinents.size > 2) {
+        sortedContinents.forEach((key, value) => {
+            if (counter < 1) {
+                result.set(key, value);
+                counter++;
+            }
+        });
+    } else {
+        // or return all continents when their count is less or equal to 2
+        result = sortedContinents;
+    }
+    return result;
 }
 
 /**
@@ -130,6 +152,36 @@ function initialize() {
     document.getElementById('largestContinents').innerText = "";
     document.getElementById('benchmark').innerText = "";
     document.getElementById('continentCounter').hidden = true;
+}
+
+// noinspection JSClosureCompilerSyntax
+/**
+ * Given the generated world, compute all of its continents sizes
+ * @return Map<any, any> continents sizes
+ */
+function getAllContinentsSizes() {
+    let counter = 0;
+    let result = new Map();
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (world[i][j] === 1) {
+                counter++;
+                let contSize = getContinentSize([i, j]);
+                result.set(counter.toString(), contSize);
+            }
+        }
+    }
+    return result;
+}
+
+/**
+ * Return the size of the continent which the start position is part of
+ * @param startPosition starting position is an array of indices
+ * @return the continent size around the input starting position
+ */
+function getContinentSize(startPosition) {
+    // TODO: implement function
+    return undefined;
 }
 
 
