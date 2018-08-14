@@ -20,15 +20,15 @@ function main() {
     largestContinents = getTwoLargestContinents();
     let largestContinentsStr = getLargestContinentsAsString();
 
-    // benchmark: measure average time taken by program to run over a thousand iterations
-    // averageRunningTime = getAverageRunningTime(size);
-    // let benchmarkStr = averageRunningTime.toString();
-
     // unhide computation results components
     document.getElementById('continentCounter').hidden = false;
     document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
     document.getElementById('largestContinents').innerText = "The two largest continents are: " + largestContinentsStr;
-    // document.getElementById('benchmark').innerText = "Average running time is: " + benchmarkStr;
+
+    // benchmark: measure average time taken by program to run over a thousand iterations
+    averageRunningTime = getAverageRunningTime(size);
+    let benchmarkStr = averageRunningTime.toString();
+    document.getElementById('benchmark').innerText = "Average running time (ms) is: " + benchmarkStr;
 }
 
 /**
@@ -108,12 +108,14 @@ function getTwoLargestContinents() {
 
     // choose the two largest continents
     if (sortedContinents.size > 2) {
-        sortedContinents.forEach((key, value) => {
+        // iterate through the sorted map's items
+        let iter = sortedContinents[Symbol.iterator]();
+        for (let item of iter) {
             if (counter <= 1) {
-                result.set(key, value);
+                result.set(item[0], item[1]);
                 counter++;
             }
-        });
+        }
     } else {
         // or return all continents when their count is less or equal to 2
         result = sortedContinents;
@@ -133,7 +135,7 @@ function getAverageRunningTime(n) {
         let start = performance.now();
         world = generateRandomWorld(n);
         getAllContinentsSizes();
-        total_time = performance.now() - start;
+        total_time += performance.now() - start;
     }
     return total_time/iterations;
 }
@@ -251,9 +253,12 @@ function checkNeighbours(tile) {
  */
 function getLargestContinentsAsString() {
     let continentStr = "{";
-    largestContinents.forEach((value, key) => {
-        continentStr += value + ': ' + key + ', ';
-    });
+    // iterate through the map's items
+    let iter = largestContinents[Symbol.iterator]();
+    for (let item of iter) {
+        continentStr += item[0] + ': ' + item[1] + ', ';
+    }
+    // remove the trailing comma and space
     continentStr = continentStr.substring(0, continentStr.length - 2);
     continentStr += '}';
     return continentStr;
