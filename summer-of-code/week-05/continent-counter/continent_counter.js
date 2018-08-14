@@ -272,6 +272,3 @@ function checkNeighbours(tile) {
         }
     }
 }
-
-
-
