@@ -3,42 +3,62 @@ let size = 0;
 let world = [];
 let worldStr = '';
 let tilesQueue = [];
-let largestContinents = {};
+let largestContinents = new Map();
 let averageRunningTime = 0.0;
 
 /**
  * Main entry point for our continent counter challenge
  */
 function main() {
+    document.getElementById('sizeInput').disabled = true;
+    document.getElementById('submitButton').disabled = true;
 
-  document.getElementById('sizeInput').disabled = true;
-  document.getElementById('submitButton').disabled = true;
+    let worldStr = '';
+    let largestContinentsStr = '';
+    let benchmarkStr = '';
 
-  let worldStr = '';
-  let largestContinentsStr = '';
-  let benchmarkStr = '';
+    let finished = function () {
+        // generate world of size input by the user
+        world = generateRandomWorld(size);
+    }.then(() => {
+        // get a string representation of the previously (randomly) generated world
+        worldStr = getWorldAsString();
+    }).then(() => {
+        // compute the two largest continents from the world
+        largestContinentsStr = "{";
+        largestContinents = getTwoLargestContinents();
+        largestContinents.forEach((key, value) => {
+            largestContinentsStr += key + ': ' + value + ',';
+        });
+        largestContinentsStr += '}';
+    }).then(() => {
+        // benchmark: measure average time taken by program to run over a thousand iterations
+        averageRunningTime = getAverageRunningTime(size);
+        benchmarkStr = averageRunningTime.toString();
+    });
 
-  let result = function () {
-      // TODO: use promises to solve the continent counter challenge
-  };
+    if (finished) {
+        // unhide computation results components
+        document.getElementById('continentCounter').hidden = false;
+        document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
+        document.getElementById('largestContinents').innerText = "The two largest continents are: " + largestContinentsStr;
+        document.getElementById('benchmark').innerText = "Average running time is: " + benchmarkStr;
+    }
 
-  // generate world of size input by the user
-  world = generateRandomWorld(size);
+    /*
+    // generate world of size input by the user
+    world = generateRandomWorld(size);
 
-  // get a string representation of the previously (randomly) generated world
-  worldStr = getWorldAsString();
+    // get a string representation of the previously (randomly) generated world
+    worldStr = getWorldAsString();
 
-  // compute the two largest continents from the world
-  largestContinents = getTwoLargestContinents();
+    // compute the two largest continents from the world
+    largestContinents = getTwoLargestContinents();
 
-  // benchmark: measure average time taken by program to run over a thousand iterations
-  averageRunningTime = getAverageRunningTime(size);
+    // benchmark: measure average time taken by program to run over a thousand iterations
+    averageRunningTime = getAverageRunningTime(size);
+    */
 
-  // unhide computation results components
-  document.getElementById('continentCounter').hidden = false;
-  document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
-  document.getElementById('largestContinents').innerText = "The two largest continents are: ";
-  document.getElementById('benchmark').innerText = "Average running time is: ";
 }
 
 /**
@@ -102,9 +122,10 @@ function getWorldAsString() {
     return griddStr;
 }
 
+// noinspection JSClosureCompilerSyntax
 /**
  * Return the two largest continents of a generated world
- * @return a map of the two largest continents of the world
+ * @return Map<any, any> map of the two largest continents of the world
  */
 function getTwoLargestContinents() {
     let continents = getAllContinentsSizes();
@@ -113,7 +134,7 @@ function getTwoLargestContinents() {
     ));
 
     let counter = 0;
-    let result = {};
+    let result = new Map();
 
     // choose the two largest continents
     if (sortedContinents.size > 2) {
