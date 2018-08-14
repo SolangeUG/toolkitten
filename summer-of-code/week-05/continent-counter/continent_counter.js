@@ -14,6 +14,14 @@ function main() {
   document.getElementById('sizeInput').disabled = true;
   document.getElementById('submitButton').disabled = true;
 
+  let worldStr = '';
+  let largestContinentsStr = '';
+  let benchmarkStr = '';
+
+  let result = function () {
+      // TODO: use promises to solve the continent counter challenge
+  };
+
   // generate world of size input by the user
   world = generateRandomWorld(size);
 
@@ -125,10 +133,18 @@ function getTwoLargestContinents() {
 /**
  * Return the average running time of the continent counter program
  * @param n size of the world input by the user
- * @return average running time of program over a thousand iterations
+ * @return number running time of program over a thousand iterations
  */
 function getAverageRunningTime(n) {
-    // TODO: implement function
+    let total_time = 0;
+    let iterations = 1000;
+    for (let i = 0; i < iterations; i++) {
+        let start = performance.now();
+        world = generateRandomWorld(n);
+        getAllContinentsSizes();
+        total_time = performance.now() - start;
+    }
+    return total_time/iterations;
 }
 
 /**
