@@ -1,7 +1,6 @@
 // Global variables
 let size = 0;
 let world = [];
-let worldStr = '';
 let tilesQueue = [];
 let largestContinents = new Map();
 let averageRunningTime = 0.0;
@@ -13,52 +12,23 @@ function main() {
     document.getElementById('sizeInput').disabled = true;
     document.getElementById('submitButton').disabled = true;
 
-    let worldStr = '';
-    let largestContinentsStr = '';
-    let benchmarkStr = '';
-
-    let finished = function () {
-        // generate world of size input by the user
-        world = generateRandomWorld(size);
-    }.then(() => {
-        // get a string representation of the previously (randomly) generated world
-        worldStr = getWorldAsString();
-    }).then(() => {
-        // compute the two largest continents from the world
-        largestContinentsStr = "{";
-        largestContinents = getTwoLargestContinents();
-        largestContinents.forEach((key, value) => {
-            largestContinentsStr += key + ': ' + value + ',';
-        });
-        largestContinentsStr += '}';
-    }).then(() => {
-        // benchmark: measure average time taken by program to run over a thousand iterations
-        averageRunningTime = getAverageRunningTime(size);
-        benchmarkStr = averageRunningTime.toString();
-    });
-
-    if (finished) {
-        // unhide computation results components
-        document.getElementById('continentCounter').hidden = false;
-        document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
-        document.getElementById('largestContinents').innerText = "The two largest continents are: " + largestContinentsStr;
-        document.getElementById('benchmark').innerText = "Average running time is: " + benchmarkStr;
-    }
-
-    /*
-    // generate world of size input by the user
+    // generate world of size input by the user and its string representation
     world = generateRandomWorld(size);
+    let worldStr = getWorldAsString();
 
-    // get a string representation of the previously (randomly) generated world
-    worldStr = getWorldAsString();
-
-    // compute the two largest continents from the world
+    // compute the two largest continents from the world and their string representation
     largestContinents = getTwoLargestContinents();
+    let largestContinentsStr = getLargestContinentsAsString();
 
     // benchmark: measure average time taken by program to run over a thousand iterations
-    averageRunningTime = getAverageRunningTime(size);
-    */
+    // averageRunningTime = getAverageRunningTime(size);
+    // let benchmarkStr = averageRunningTime.toString();
 
+    // unhide computation results components
+    document.getElementById('continentCounter').hidden = false;
+    document.getElementById('generatedWorld').innerText = "Generated World is:\n" + worldStr;
+    document.getElementById('largestContinents').innerText = "The two largest continents are: " + largestContinentsStr;
+    // document.getElementById('benchmark').innerText = "Average running time is: " + benchmarkStr;
 }
 
 /**
@@ -139,7 +109,7 @@ function getTwoLargestContinents() {
     // choose the two largest continents
     if (sortedContinents.size > 2) {
         sortedContinents.forEach((key, value) => {
-            if (counter < 1) {
+            if (counter <= 1) {
                 result.set(key, value);
                 counter++;
             }
@@ -175,7 +145,6 @@ function initialize() {
     // (re)initialize global variables
     size = 0;
     world = [];
-    worldStr = '';
     tilesQueue = [];
     largestContinents = {};
     averageRunningTime = 0.0;
@@ -183,6 +152,8 @@ function initialize() {
     // (re)initialize HTML components to dispaly results
     document.getElementById('sizeInput').disabled = false;
     document.getElementById('sizeInput').innerHTML = '';
+    document.getElementById('sizeInput').value = 0;
+    document.getElementById('sizeInput').focus();
     document.getElementById('submitButton').disabled = false;
 
     document.getElementById('generatedWorld').innerText = "";
@@ -199,12 +170,13 @@ function initialize() {
 function getAllContinentsSizes() {
     let counter = 0;
     let result = new Map();
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
+    let n = world.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
             if (world[i][j] === 1) {
                 counter++;
                 let contSize = getContinentSize([i, j]);
-                result.set(counter.toString(), contSize);
+                result.set("'continent " + counter.toString() + "'", contSize);
             }
         }
     }
@@ -230,7 +202,7 @@ function getContinentSize(startPosition) {
         tilesQueue.push(startPosition);
 
         while (tilesQueue.length > 0) {
-            let tile = tilesQueue.pop();
+            let tile = tilesQueue.shift();
             let i = tile[0]; let j = tile[1];
             if (world[i][j] === 1) {
                 continent_size += 1;
@@ -259,7 +231,7 @@ function checkNeighbours(tile) {
     for (let i = (row - 1); i <= (row + 1); i++) {
         // make sure we're still inside the world/grid's bounds
         if ((i >= 0) && (i < n)) {
-            for (let j = (col - 1); j <= (col + 1); i++) {
+            for (let j = (col - 1); j <= (col + 1); j++) {
                 // make sure we're still inside the world/grid's bounds
                 if ((j >= 0) && (j < n)) {
                     // check the tile's value
@@ -271,4 +243,18 @@ function checkNeighbours(tile) {
             }
         }
     }
+}
+
+/**
+ * Return a string representation of the two largest continents
+ * @return string two largest continents as a string
+ */
+function getLargestContinentsAsString() {
+    let continentStr = "{";
+    largestContinents.forEach((value, key) => {
+        continentStr += value + ': ' + key + ', ';
+    });
+    continentStr = continentStr.substring(0, continentStr.length - 2);
+    continentStr += '}';
+    return continentStr;
 }
