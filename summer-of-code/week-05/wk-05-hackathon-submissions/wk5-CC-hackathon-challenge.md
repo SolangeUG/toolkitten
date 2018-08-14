@@ -16,7 +16,7 @@ soc05h-cc-firstname-lastname.py
 ```
 
 - `soc` is for the Summer Of Code
-- `05`  is for Week 1
+- `05`  is for Week 5
 - `h`   is for Hackathon
 - `cc`  is for Continent Counter
 - `firstname-lastname` is your name, to make sure there are no clashes with other people's submissions when you send a PR into the same sub-folder.
