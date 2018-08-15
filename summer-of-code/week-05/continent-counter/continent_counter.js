@@ -1,3 +1,5 @@
+'use strict';
+
 // Global variables
 let size = 0;
 let world = [];
