@@ -36,7 +36,7 @@ function main() {
 /**
  * Check user input for world size
  */
-/* jslint node:true, unused:false */
+/* jslint unused:false */
 // noinspection JSUnusedGlobalSymbols
 function checkUserInput() {
     // retrieve the size of world to generate
@@ -58,8 +58,8 @@ function checkUserInput() {
 
 /**
  * Randomly generate a world of size n
- * @param n size of the world to generate
- * @return any[] randomly generated world
+ * @param n -- size of the world to generate
+ * @return any[] -- a randomly generated world(grid)
  */
 function generateRandomWorld(n) {
     let grid = [];
@@ -76,6 +76,7 @@ function generateRandomWorld(n) {
 
 /**
  * Return a string representation of the generated world (grid)
+ * @return string -- the generated world (grid) as a string
  */
 function getWorldAsString() {
     let griddStr = '\t[';
@@ -94,10 +95,10 @@ function getWorldAsString() {
     return griddStr;
 }
 
-// noinspection JSClosureCompilerSyntax
+
 /**
  * Return the two largest continents of a generated world
- * @return Map<any, any> map of the two largest continents of the world
+ * @dict Map<string, integer> -- map of the two largest continents of the world
  */
 function getTwoLargestContinents() {
     let continents = getAllContinentsSizes();
@@ -127,8 +128,8 @@ function getTwoLargestContinents() {
 
 /**
  * Return the average running time of the continent counter program
- * @param n size of the world input by the user
- * @return number running time of program over a thousand iterations
+ * @param n -- size of the world input by the user
+ * @return number -- running time of program over a thousand iterations
  */
 function getAverageRunningTime(n) {
     let total_time = 0;
@@ -166,10 +167,9 @@ function initialize() {
     document.getElementById('continentCounter').hidden = true;
 }
 
-// noinspection JSClosureCompilerSyntax
 /**
  * Given the generated world, compute all of its continents sizes
- * @return Map<any, any> continents sizes
+ * @dict Map<any, any> -- a map of each continent and its size
  */
 function getAllContinentsSizes() {
     let counter = 0;
@@ -189,8 +189,8 @@ function getAllContinentsSizes() {
 
 /**
  * Return the size of the continent which the start position is part of
- * @param startPosition starting position is an array of indices
- * @return number continent size around the input starting position
+ * @param startPosition -- starting position is an array of indices
+ * @return number -- continent size around the input starting position
  */
 function getContinentSize(startPosition) {
     let continent_size = 0;
@@ -223,7 +223,7 @@ function getContinentSize(startPosition) {
 /**
  * Check if the neighbouring tiles have a desired value (1 in this case)
  * and add them to our global variable tilesQueue so they can be explored later
- * @param tile input tile as an array of indices
+ * @param tile -- input tile as an array of indices
  */
 function checkNeighbours(tile) {
     let row = tile[0]; let col = tile[1]; let n = world.length;
@@ -251,7 +251,7 @@ function checkNeighbours(tile) {
 
 /**
  * Return a string representation of the two largest continents
- * @return string two largest continents as a string
+ * @return string -- two largest continents as a string
  */
 function getLargestContinentsAsString() {
     let continentStr = "{";
