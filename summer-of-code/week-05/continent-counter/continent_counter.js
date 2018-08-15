@@ -16,11 +16,11 @@ function main() {
 
     // generate world of size input by the user and its string representation
     world = generateRandomWorld(size);
-    let worldStr = getWorldAsString();
+    let worldStr = worldToString();
 
     // compute the two largest continents from the world and their string representation
-    largestContinents = getTwoLargestContinents();
-    let largestContinentsStr = getLargestContinentsAsString();
+    largestContinents = getLargestContinents();
+    let largestContinentsStr = largestContinentsToString();
 
     // unhide computation results components
     document.getElementById('continentCounter').hidden = false;
@@ -75,33 +75,11 @@ function generateRandomWorld(n) {
 }
 
 /**
- * Return a string representation of the generated world (grid)
- * @return string -- the generated world (grid) as a string
- */
-function getWorldAsString() {
-    let griddStr = '\t[';
-    let n = world.length;
-    for (let i = 0; i < n; i++) {
-        if (i !== 0) {
-          griddStr += '\t ' + world[i];
-        } else {
-          griddStr += world[i];
-        }
-        if (i !== n - 1) {
-          griddStr += '\n';
-        }
-    }
-    griddStr += ']';
-    return griddStr;
-}
-
-
-/**
  * Return the two largest continents of a generated world
  * @dict Map<string, integer> -- map of the two largest continents of the world
  */
-function getTwoLargestContinents() {
-    let continents = getAllContinentsSizes();
+function getLargestContinents() {
+    let continents = getAllContinents();
     let sortedContinents = new Map([...continents.entries()].sort(
         (a, b) => b[1] - a[1]
     ));
@@ -126,6 +104,7 @@ function getTwoLargestContinents() {
     return result;
 }
 
+
 /**
  * Return the average running time of the continent counter program
  * @param n -- size of the world input by the user
@@ -137,7 +116,7 @@ function getAverageRunningTime(n) {
     for (let i = 0; i < iterations; i++) {
         let start = performance.now();
         world = generateRandomWorld(n);
-        getAllContinentsSizes();
+        getAllContinents();
         total_time += performance.now() - start;
     }
     return total_time/iterations;
@@ -171,7 +150,7 @@ function initialize() {
  * Given the generated world, compute all of its continents sizes
  * @dict Map<any, any> -- a map of each continent and its size
  */
-function getAllContinentsSizes() {
+function getAllContinents() {
     let counter = 0;
     let result = new Map();
     let n = world.length;
@@ -193,7 +172,7 @@ function getAllContinentsSizes() {
  * @return number -- continent size around the input starting position
  */
 function getContinentSize(startPosition) {
-    let continent_size = 0;
+    let continentSize = 0;
     let n = world.length;
 
     // startPosition is an array of indices on the grid
@@ -209,7 +188,7 @@ function getContinentSize(startPosition) {
             let tile = tilesQueue.shift();
             let i = tile[0]; let j = tile[1];
             if (world[i][j] === 1) {
-                continent_size += 1;
+                continentSize += 1;
                 // mark this element as "already treated"
                 world[i][j] = 0;
                 // explore this "element/tile" neighbours
@@ -217,7 +196,7 @@ function getContinentSize(startPosition) {
             }
         }
     }
-    return continent_size;
+    return continentSize;
 }
 
 /**
@@ -250,10 +229,31 @@ function checkNeighbours(tile) {
 }
 
 /**
+ * Return a string representation of the generated world (grid)
+ * @return string -- the generated world (grid) as a string
+ */
+function worldToString() {
+    let griddStr = '\t[';
+    let n = world.length;
+    for (let i = 0; i < n; i++) {
+        if (i !== 0) {
+            griddStr += '\t ' + world[i];
+        } else {
+            griddStr += world[i];
+        }
+        if (i !== n - 1) {
+            griddStr += '\n';
+        }
+    }
+    griddStr += ']';
+    return griddStr;
+}
+
+/**
  * Return a string representation of the two largest continents
  * @return string -- two largest continents as a string
  */
-function getLargestContinentsAsString() {
+function largestContinentsToString() {
     let continentStr = "{";
     // iterate through the map's items
     let iter = largestContinents[Symbol.iterator]();
