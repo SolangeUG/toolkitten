@@ -123,30 +123,6 @@ function getAverageRunningTime(n) {
 }
 
 /**
- * (Re)Initialize global variables
- */
-function initialize() {
-    // (re)initialize global variables
-    size = 0;
-    world = [];
-    tilesQueue = [];
-    largestContinents = {};
-    averageRunningTime = 0.0;
-
-    // (re)initialize HTML components to dispaly results
-    document.getElementById('sizeInput').disabled = false;
-    document.getElementById('sizeInput').innerHTML = '';
-    document.getElementById('sizeInput').value = 0;
-    document.getElementById('sizeInput').focus();
-    document.getElementById('submitButton').disabled = false;
-
-    document.getElementById('generatedWorld').innerText = "";
-    document.getElementById('largestContinents').innerText = "";
-    document.getElementById('benchmark').innerText = "";
-    document.getElementById('continentCounter').hidden = true;
-}
-
-/**
  * Given the generated world, compute all of its continents sizes
  * @dict Map<any, any> -- a map of each continent and its size
  */
@@ -264,4 +240,28 @@ function largestContinentsToString() {
     continentStr = continentStr.substring(0, continentStr.length - 2);
     continentStr += '}';
     return continentStr;
+}
+
+/**
+ * (Re)Initialize global variables
+ */
+function initialize() {
+    // (re)initialize global variables
+    size = 0;
+    world = [];
+    tilesQueue = [];
+    largestContinents = {};
+    averageRunningTime = 0.0;
+
+    // (re)initialize HTML components to dispaly results
+    document.getElementById('sizeInput').disabled = false;
+    document.getElementById('sizeInput').innerHTML = '';
+    document.getElementById('sizeInput').value = 0;
+    document.getElementById('sizeInput').focus();
+    document.getElementById('submitButton').disabled = false;
+
+    document.getElementById('generatedWorld').innerText = "";
+    document.getElementById('largestContinents').innerText = "";
+    document.getElementById('benchmark').innerText = "";
+    document.getElementById('continentCounter').hidden = true;
 }
