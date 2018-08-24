@@ -70,3 +70,6 @@ __pycache__/
 
 # IPython notebook checkpoints
 .ipynb_checkpoints
+
+# data files
+data/
