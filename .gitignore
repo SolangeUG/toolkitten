@@ -64,3 +64,6 @@ venv/
 # Pycharm IDE project files
 .idea/
 *.iml
+
+# IPython notebook checkpoints
+.ipynb_checkpoints
