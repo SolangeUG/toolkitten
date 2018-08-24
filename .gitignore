@@ -67,3 +67,6 @@ venv
 
 # Python bytecode
 __pycache__/
+
+# IPython notebook checkpoints
+.ipynb_checkpoints
